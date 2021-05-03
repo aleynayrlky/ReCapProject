@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
@@ -9,7 +10,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
+            CarManager carManager = new CarManager(new EfCarDal());
             foreach (var car in carManager.GetAll())
             {
                 Console.WriteLine(car.CarId + " " + 
@@ -17,28 +18,27 @@ namespace ConsoleUI
                     car.ColorId + " " + 
                     car.DailyPrice + " " + 
                     car.Description + " " + 
-                    car.ModelYear);
+                    car.ModelYear + " " +
+                    car.CarName);
             }
             Console.WriteLine("--------------------");
 
-            Car car1 = new Car()
-            {
-                CarId = 6,
-                BrandId = 3,
-                ColorId = 3,
-                DailyPrice = 150,
-                ModelYear = 2013,
-                Description = "Hyundai"
-            };
-            Car car2 = new Car()
-            {
-                CarId = 7,
-                BrandId = 2,
-                ColorId = 1,
-                DailyPrice = 300,
-                ModelYear = 2018,
-                Description = "Bmw"
-            };
+            Car car1 = new Car();
+            car1.BrandId = 3;
+            car1.ColorId = 3;
+            car1.CarName = "hıa";
+            car1.DailyPrice = 56;
+            car1.ModelYear = 1997;
+            car1.Description = "lifkdfk";
+
+            Car car2 = new Car();
+            car2.BrandId = 2;
+            car2.ColorId = 1;
+            car2.CarName = "dfgdfg";
+            car2.DailyPrice = 565;
+            car2.ModelYear = 1990;
+            car2.Description = "sfgzv";
+
             carManager.Add(car1);
             carManager.Add(car2);
             foreach (var car in carManager.GetAll())
@@ -48,7 +48,8 @@ namespace ConsoleUI
                     car.ColorId + " " +
                     car.DailyPrice + " " +
                     car.Description + " " +
-                    car.ModelYear);
+                    car.ModelYear + " " +
+                    car.CarName);
             }
             Console.WriteLine("--------------------");
 
@@ -60,33 +61,23 @@ namespace ConsoleUI
                     car.ColorId + " " +
                     car.DailyPrice + " " +
                     car.Description + " " +
-                    car.ModelYear);
+                    car.ModelYear + " " +
+                    car.CarName);
             }
             Console.WriteLine("--------------------");
 
-            //carManager.Update(car1);
-            //foreach (var car in carManager.GetAll())
-            //{
-            //    Console.WriteLine(car.CarId + " " +
-            //        car.BrandId + " " +
-            //        car.ColorId + " " +
-            //        car.DailyPrice + " " +
-            //        car.Description + " " +
-            //        car.ModelYear);
-            //}
-            //Console.WriteLine("--------------------");
-
-            //carManager.GetByColorId(2);
-            //foreach (var car in carManager.GetAll())
-            //{
-            //    Console.WriteLine(car.CarId + " " +
-            //        car.BrandId + " " +
-            //        car.ColorId + " " +
-            //        car.DailyPrice + " " +
-            //        car.Description + " " +
-            //        car.ModelYear);
-            //}
-            //Console.WriteLine("--------------------");
+            carManager.Update(car1);
+            foreach (var car in carManager.GetAll())
+            {
+                Console.WriteLine(car.CarId + " " +
+                    car.BrandId + " " +
+                    car.ColorId + " " +
+                    car.DailyPrice + " " +
+                    car.Description + " " +
+                    car.ModelYear + " " +
+                    car.CarName);
+            }
+            Console.WriteLine("--------------------");
         }
     }
 }

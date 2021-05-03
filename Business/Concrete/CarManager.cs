@@ -19,7 +19,14 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            _carDal.Add(car);
+            if (car.CarName.Length > 2 && car.DailyPrice > 0)
+            {
+                _carDal.Add(car);
+            }
+            else
+            {
+                Console.WriteLine("Girdiğiniz araba kriterlere uymamaktadır!");
+            }
         }
 
         public void Delete(Car car)
@@ -32,10 +39,7 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
-        public List<Car> GetByColorId(int colorId)
-        {
-            return _carDal.GetByColorId(colorId);
-        }
+       
 
         public void Update(Car car)
         {
